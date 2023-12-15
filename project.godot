@@ -16,4 +16,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scenes/global/global.gd"
+Game="*res://scenes/global/game.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080

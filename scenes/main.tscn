@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvm5spg7c5ktw"]
+[gd_scene load_steps=5 format=3 uid="uid://bvm5spg7c5ktw"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7ls4b"]
+[ext_resource type="Script" path="res://scenes/GameWrapper.gd" id="2_csfof"]
+[ext_resource type="PackedScene" uid="uid://bcxcku1aoctw4" path="res://scenes/ui/ingame_ui.tscn" id="3_b32x8"]
+[ext_resource type="PackedScene" uid="uid://c0q2jmequji4t" path="res://scenes/ui/game_score.tscn" id="4_os8ie"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7ls4b")
 
-[node name="Game" type="Node2D" parent="."]
+[node name="GameWrapper" type="Node2D" parent="."]
+script = ExtResource("2_csfof")
+
+[node name="IngameUI" parent="GameWrapper" instance=ExtResource("3_b32x8")]
+visible = false
+
+[node name="GameScore" parent="GameWrapper" instance=ExtResource("4_os8ie")]
+visible = false
