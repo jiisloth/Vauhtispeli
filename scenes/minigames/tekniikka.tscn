@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dnxxajrwi0mc6"]
+[gd_scene load_steps=2 format=3 uid="uid://dnxxajrwi0mc6"]
+
+[ext_resource type="Script" path="res://scenes/minigames/tekniikka.gd" id="1_lbe26"]
 
 [node name="Tekniikka" type="Node2D"]
+script = ExtResource("1_lbe26")
 
 [node name="Test" type="Label" parent="."]
 offset_left = 172.0

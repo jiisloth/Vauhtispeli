@@ -1,16 +1,70 @@
-[gd_scene format=3 uid="uid://c0q2jmequji4t"]
+[gd_scene load_steps=4 format=3 uid="uid://c0q2jmequji4t"]
 
-[node name="GameScore" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[ext_resource type="Script" path="res://scenes/ui/game_score.gd" id="1_n8yme"]
+[ext_resource type="Texture2D" uid="uid://dqeyb8gdhqv2g" path="res://img/star.png" id="2_k5rm8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x2pxy"]
+font_size = 64
+
+[node name="GameScore" type="CanvasLayer"]
+script = ExtResource("1_n8yme")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -252.5
+offset_right = 344.0
+offset_bottom = 252.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "game ended. u got x points!!
+[node name="Gamename" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_x2pxy")
+
+[node name="Stars" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Star" type="CenterContainer" parent="VBoxContainer/Stars"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/Stars/Star"]
+layout_mode = 2
+
+[node name="Star" type="Sprite2D" parent="VBoxContainer/Stars/Star/Control"]
+texture = ExtResource("2_k5rm8")
+
+[node name="Star2" type="CenterContainer" parent="VBoxContainer/Stars"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/Stars/Star2"]
+layout_mode = 2
+
+[node name="Star" type="Sprite2D" parent="VBoxContainer/Stars/Star2/Control"]
+texture = ExtResource("2_k5rm8")
+
+[node name="Star3" type="CenterContainer" parent="VBoxContainer/Stars"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/Stars/Star3"]
+layout_mode = 2
+
+[node name="Star" type="Sprite2D" parent="VBoxContainer/Stars/Star3/Control"]
+texture = ExtResource("2_k5rm8")
+
+[node name="PayToWin" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "PAY TO WIN"
+
+[node name="NextGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Next Game
 "
