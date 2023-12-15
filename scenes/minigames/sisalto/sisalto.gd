@@ -20,9 +20,17 @@ func _process(delta):
 	elif phase == STAR_3:
 		pass
 
+func spawn_new_game(position):
+	var game = game_prefab.instantiate()
+	game.position = position
+	game.movement_stop.connect(level_failed)
+	$Games.add_child(game)
+	return game
 
 func _on_timer_timeout():
-	var game = game_prefab.instantiate()
-	game.position = Vector2(rng.randf_range(0, 1920), 0)
-	$Games.add_child(game)
+	spawn_new_game(Vector2(rng.randf_range(0, 1920), 0))
 	$Timer.start(3)
+	
+func level_failed():
+	# print("rippistä")
+	pass

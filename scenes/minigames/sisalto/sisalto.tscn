@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://co3ih2ailn7gj"]
+[gd_scene load_steps=9 format=3 uid="uid://co3ih2ailn7gj"]
 
 [ext_resource type="Script" path="res://scenes/minigames/sisalto/Viuhti.gd" id="1_arfwe"]
 [ext_resource type="Texture2D" uid="uid://c0rom3gvyt22a" path="res://icon.svg" id="1_ex747"]
@@ -9,8 +9,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_schj7"]
 size = Vector2(118, 300)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ea1ef"]
+size = Vector2(61.4034, 87.7193)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_30mpc"]
-size = Vector2(1210.5, 270)
+size = Vector2(2211, 270)
 
 [node name="Sisalto" type="Node2D"]
 script = ExtResource("1_pqpm0")
@@ -20,11 +23,11 @@ game_prefab = ExtResource("2_lrv78")
 one_shot = true
 autostart = true
 
-[node name="Viuhti" type="CharacterBody2D" parent="."]
+[node name="Viuhti" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(557, 410)
 scale = Vector2(0.57, 0.57)
+collision_mask = 5
 script = ExtResource("1_arfwe")
-metadata/_edit_group_ = true
 
 [node name="Icon" type="Sprite2D" parent="Viuhti"]
 position = Vector2(0, 91)
@@ -35,11 +38,25 @@ texture = ExtResource("1_ex747")
 position = Vector2(0, 91)
 shape = SubResource("RectangleShape2D_schj7")
 
+[node name="GameCollisionArea" type="Area2D" parent="Viuhti"]
+position = Vector2(1.75439, 150.877)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viuhti/GameCollisionArea"]
+shape = SubResource("RectangleShape2D_ea1ef")
+
+[node name="HeldGame" type="Sprite2D" parent="Viuhti"]
+visible = false
+position = Vector2(-1.75439, 103.509)
+scale = Vector2(0.630482, 1)
+
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(564, 686)
+position = Vector2(621, 962)
+collision_layer = 4
+collision_mask = 7
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(335.5, 0)
 shape = SubResource("RectangleShape2D_30mpc")
 
 [node name="ColorRect" type="ColorRect" parent="Ground"]
@@ -48,9 +65,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -605.0
+offset_left = -626.0
 offset_top = -134.0
-offset_right = 605.0
+offset_right = 1306.0
 offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -74,3 +91,4 @@ position = Vector2(300, 0)
 position = Vector2(600, 0)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_shape_entered" from="Viuhti/GameCollisionArea" to="Viuhti" method="_on_game_collision_area_area_shape_entered"]
