@@ -5,6 +5,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    $GameWrapper.set_game(Game.TEKNIIKKA)
     pass # Replace with function body.
 
 
@@ -12,9 +13,3 @@ func _ready():
 func _process(delta):
     pass
 
-
-func set_game(g):
-    var scene = load(Global.games[g]["scene"])
-    $Game.add_child(scene)
-    #Tee jotaki tähä.
-    

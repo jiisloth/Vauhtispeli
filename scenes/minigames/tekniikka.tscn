@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://dnxxajrwi0mc6"]
 
 [node name="Tekniikka" type="Node2D"]
+
+[node name="Test" type="Label" parent="."]
+offset_left = 172.0
+offset_top = 129.0
+offset_right = 253.0
+offset_bottom = 152.0
+text = "This is a tekiinka game
+"
