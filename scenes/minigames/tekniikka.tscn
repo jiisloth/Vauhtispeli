@@ -1,9 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnxxajrwi0mc6"]
+[gd_scene load_steps=9 format=3 uid="uid://dnxxajrwi0mc6"]
 
 [ext_resource type="Script" path="res://scenes/minigames/tekniikka.gd" id="1_lbe26"]
+[ext_resource type="PackedScene" uid="uid://n2ipg2vdaewo" path="res://scenes/minigames/tekniikka/pipe.tscn" id="2_urs38"]
+[ext_resource type="PackedScene" uid="uid://cs40cic4peie2" path="res://scenes/minigames/tekniikka/pipeend.tscn" id="3_68ad2"]
+[ext_resource type="PackedScene" uid="uid://cjfamor7x2tmf" path="res://scenes/minigames/tekniikka/pipecursor.tscn" id="4_xqnjb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hohdy"]
+bg_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvk55"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqux5"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwg2k"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Tekniikka" type="Node2D"]
 script = ExtResource("1_lbe26")
+Pipe = ExtResource("2_urs38")
+PipeEnd = ExtResource("3_68ad2")
 
 [node name="Test" type="Label" parent="."]
 offset_left = 172.0
@@ -12,3 +29,71 @@ offset_right = 253.0
 offset_bottom = 152.0
 text = "This is a tekiinka game
 "
+
+[node name="PipeHolder" type="Node2D" parent="."]
+position = Vector2(96, 224)
+
+[node name="Pipecursor" parent="PipeHolder" instance=ExtResource("4_xqnjb")]
+width = 6.0
+
+[node name="Timers" type="VBoxContainer" parent="."]
+offset_left = 1312.0
+offset_top = 264.0
+offset_right = 1801.0
+offset_bottom = 756.0
+theme_override_constants/separation = 40
+
+[node name="ProgressBar" type="ProgressBar" parent="Timers"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_hohdy")
+show_percentage = false
+
+[node name="Label" type="Label" parent="Timers/ProgressBar"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 40.0
+offset_bottom = -4.0
+text = "ASD1"
+
+[node name="ProgressBar2" type="ProgressBar" parent="Timers"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_yvk55")
+show_percentage = false
+
+[node name="Label" type="Label" parent="Timers/ProgressBar2"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 40.0
+offset_bottom = -4.0
+text = "ASD2"
+
+[node name="ProgressBar3" type="ProgressBar" parent="Timers"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_cqux5")
+show_percentage = false
+
+[node name="Label" type="Label" parent="Timers/ProgressBar3"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 40.0
+offset_bottom = -4.0
+text = "ASD3"
+
+[node name="ProgressBar4" type="ProgressBar" parent="Timers"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_bwg2k")
+show_percentage = false
+
+[node name="Label" type="Label" parent="Timers/ProgressBar4"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 40.0
+offset_bottom = -4.0
+text = "ASD3"
+
+[connection signal="moved" from="PipeHolder/Pipecursor" to="." method="_on_pipecursor_moved"]
+[connection signal="rotate_pipe" from="PipeHolder/Pipecursor" to="." method="_on_pipecursor_rotate_pipe"]

@@ -16,3 +16,4 @@ func set_score(score):
             star.modulate = gameinfo["color"]
         else:
             star.modulate = Color("#000000")
+        i += 1

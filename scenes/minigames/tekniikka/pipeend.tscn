@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs40cic4peie2"]
+
+[ext_resource type="Script" path="res://scenes/minigames/tekniikka/pipeend.gd" id="1_307sb"]
+
+[node name="PipeEnd" type="Node2D"]
+script = ExtResource("1_307sb")
+
+[node name="Base" type="ColorRect" parent="."]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+color = Color(0.203922, 0.203922, 0.203922, 1)
+
+[node name="Parts" type="Node2D" parent="."]
+
+[node name="Right" type="Line2D" parent="Parts"]
+points = PackedVector2Array(0, 0, 1, 0)
+closed = true
+width = 50.0
+default_color = Color(0.839216, 0, 0.972549, 1)
+begin_cap_mode = 2
+
+[node name="Down" type="Line2D" parent="Parts"]
+points = PackedVector2Array(0, 0, 0, 1)
+width = 50.0
+default_color = Color(0.839216, 0, 0.972549, 1)
+begin_cap_mode = 2
+
+[node name="Left" type="Line2D" parent="Parts"]
+points = PackedVector2Array(0, 0, -1, 0)
+width = 50.0
+default_color = Color(0.839216, 0, 0.972549, 1)
+begin_cap_mode = 2
+
+[node name="Up" type="Line2D" parent="Parts"]
+points = PackedVector2Array(0, 0, 0, -1)
+width = 50.0
+default_color = Color(0.839216, 0, 0.972549, 1)
+begin_cap_mode = 2
+
+[node name="Inner" type="Node2D" parent="."]
+
+[node name="Right" type="Line2D" parent="Inner"]
+points = PackedVector2Array(0, 0, 1, 0)
+closed = true
+width = 50.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+
+[node name="Down" type="Line2D" parent="Inner"]
+points = PackedVector2Array(0, 0, 0, 1)
+width = 50.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+
+[node name="Left" type="Line2D" parent="Inner"]
+points = PackedVector2Array(0, 0, -1, 0)
+width = 50.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+
+[node name="Up" type="Line2D" parent="Inner"]
+points = PackedVector2Array(0, 0, 0, -1)
+width = 50.0
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2

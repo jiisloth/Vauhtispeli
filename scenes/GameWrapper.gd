@@ -16,7 +16,7 @@ func set_game(g):
         current_game.queue_free()
         current_game = null
         
-    var current_game = load(Game.games[g]["scene"]).instantiate()
+    current_game = load(Game.games[g]["scene"]).instantiate()
     $GameScore.setup_game(Game.games[g])
     $IngameUI.setup_game(Game.games[g])
     add_child(current_game)
