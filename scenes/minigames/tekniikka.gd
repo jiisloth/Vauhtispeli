@@ -135,6 +135,9 @@ func make_path():
         for id in blocks:
             astar.set_point_disabled(id, false)
         paths.append(path)
+        astar.set_point_disabled(start)
+        astar.set_point_disabled(stop)
+        
         return true
     return false
             
@@ -158,6 +161,9 @@ func pipe_out_flow(coords, output, outtype):
                 pipes[coords].kill_out(i)
                 flows[outtype] -= 1
     if flows[outtype] == 0:
+        score -= 1
+        if score >= 0:
+            get_parent().set_score(score)
         print(str(outtype) + " stopped flowing")
 
     
