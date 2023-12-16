@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjfamor7x2tmf"]
+
+[ext_resource type="Script" path="res://scenes/minigames/tekniikka/pipecursor.gd" id="1_lwc0c"]
+
+[node name="Pipecursor" type="Line2D"]
+z_index = 3
+points = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)
+closed = true
+width = 5.0
+joint_mode = 2
+script = ExtResource("1_lwc0c")
