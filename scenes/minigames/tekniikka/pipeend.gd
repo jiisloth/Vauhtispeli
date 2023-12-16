@@ -30,5 +30,6 @@ func kill_out(i):
 
 func start_flow(i, t, speed):
     if not start and t == cabletype:
+        $Inner.hide()
         return true
     return false 

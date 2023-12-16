@@ -6,7 +6,7 @@ extends Node2D
 var score = 3
 var gamesize = Vector2(13,13)
 @export var PipeSize = 60
-@export var FlowSpeed = 0.08
+@export var FlowSpeed = 0.15
 
 var pipes = {}
 var paths = []
@@ -18,19 +18,13 @@ var ccolors = [Color("#0000FF"),Color("#ffff00"),Color("#ff0000"),Color("#FFFFFF
 const outdirs = [Vector2.RIGHT,Vector2.DOWN,Vector2.LEFT,Vector2.UP]
 
 var flowstarts = [10,20,40,80]
+var flowtimers = [10,20,40,80]
 var flows = [1,1,1,1]
 
 func _ready():
-    seed(1)
     get_parent().set_score(score)
     
     
-    
-    var i = 0
-    for timer in $Timers.get_children():
-        timer.get_node("Timer").start(flowstarts[i])
-        timer.get_node("Timer").timeout.connect(start_flow.bind(i))
-        i += 1
     make_level()
     $PipeHolder/Pipecursor.gamesize = Vector2i(gamesize)
     $PipeHolder/Pipecursor.setup_size(PipeSize)
@@ -174,8 +168,16 @@ func start_flow(i):
 func _process(delta):
     var i = 0
     for timer in $Timers.get_children():
-        timer.value = (1- (timer.get_node("Timer").time_left / flowstarts[i]))*100
+        if flowtimers[i] > 0:
+            flowtimers[i] -= delta
+            if Input.is_action_pressed("pipe_speedup"):
+                flowtimers[i] -= delta*10
+            if flowtimers[i] <= 0:
+                flowtimers[i] = 0
+                start_flow(i)
+            timer.value = (1-(flowtimers[i] / flowstarts[i]))*100
         i += 1
+        
 
 
 func _on_pipecursor_moved(coords):

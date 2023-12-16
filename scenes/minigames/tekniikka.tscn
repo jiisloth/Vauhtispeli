@@ -56,9 +56,6 @@ offset_right = 40.0
 offset_bottom = -4.0
 text = "ASD1"
 
-[node name="Timer" type="Timer" parent="Timers/ProgressBar"]
-one_shot = true
-
 [node name="ProgressBar2" type="ProgressBar" parent="Timers"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -71,10 +68,6 @@ offset_top = -27.0
 offset_right = 40.0
 offset_bottom = -4.0
 text = "ASD2"
-
-[node name="Timer" type="Timer" parent="Timers/ProgressBar2"]
-wait_time = 2.0
-one_shot = true
 
 [node name="ProgressBar3" type="ProgressBar" parent="Timers"]
 custom_minimum_size = Vector2(0, 50)
@@ -89,10 +82,6 @@ offset_right = 40.0
 offset_bottom = -4.0
 text = "ASD3"
 
-[node name="Timer" type="Timer" parent="Timers/ProgressBar3"]
-wait_time = 3.0
-one_shot = true
-
 [node name="ProgressBar4" type="ProgressBar" parent="Timers"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -105,10 +94,6 @@ offset_top = -27.0
 offset_right = 40.0
 offset_bottom = -4.0
 text = "ASD3"
-
-[node name="Timer" type="Timer" parent="Timers/ProgressBar4"]
-wait_time = 4.0
-one_shot = true
 
 [connection signal="moved" from="PipeHolder/Pipecursor" to="." method="_on_pipecursor_moved"]
 [connection signal="rotate_pipe" from="PipeHolder/Pipecursor" to="." method="_on_pipecursor_rotate_pipe"]

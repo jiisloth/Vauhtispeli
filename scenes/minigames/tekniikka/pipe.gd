@@ -11,6 +11,7 @@ var max_flow = 1
 var flowspeed
 var cabletype = -1
 var ccolors = [Color("#0000FF"),Color("#ffff00"),Color("#ff0000"),Color("#FFFFFF")]
+var flowtime = 0
 
 var pipesize = 60
 
@@ -40,6 +41,8 @@ func _ready():
 
 func rotate_pipe(d=1):
     dir = (dir + d)%4
+    if dir < 0:
+        dir = 4 + dir
     vdir += d
     if tween:
         tween.kill()
@@ -61,7 +64,6 @@ func start_flow(i, t, speed):
         flowpoint = (dir + i) % 4
         flowing = true
         max_flow = 1/speed
-        $Flow.start(1/speed)
         var flow = $Flowingparts.get_child(flowpoint)
         flow.points[0].x = flow.points[1].x
         var end = 0
@@ -77,20 +79,26 @@ func start_flow(i, t, speed):
 
 
 func _process(delta):
-    if flowing:
+    if flowing and flowtime < max_flow:
+        flowtime += delta
+        if Input.is_action_pressed("pipe_speedup"):
+            flowtime += delta *10
+        if flowtime >= max_flow:
+            flowtime = max_flow
+            end_flow()
         var flow = $Flowingparts.get_child(flowpoint)
-        if $Flow.time_left > max_flow/2:
-            flow.points[0].x = flow.points[1].x - 2*((max_flow-$Flow.time_left)/max_flow)*flow.points[1].x
+        if flowtime < max_flow/2:
+            flow.points[0].x = flow.points[1].x - 2*(flowtime/max_flow)*flow.points[1].x
 
         else:
             flow.points[0].x = 0
             var f = 0
             for flowpart in $Flowingparts.get_children():
                 if flowpart != flow:
-                    flowpart.points[1].x = (2*((max_flow-$Flow.time_left)/max_flow)-1)*flow.points[1].x
+                    flowpart.points[1].x = (2*(flowtime/max_flow)-1)*flow.points[1].x
              
 
-func _on_flow_timeout():
+func end_flow():
     var out = ends.duplicate()
     out[flowpoint] = 0
     for r in dir:
