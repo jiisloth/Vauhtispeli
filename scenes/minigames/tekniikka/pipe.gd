@@ -10,12 +10,13 @@ var flowpoint = -1
 var max_flow = 1
 var flowspeed
 var cabletype = -1
-var ccolors = [Color("#0000FF"),Color("#ffff00"),Color("#ff0000"),Color("#FFFFFF")]
+var ccolors = [Color("#435dd5"),Color("#dabe30"),Color("#cc242e"),Color("#e9e9e9")]
 var flowtime = 0
-
-var pipesize = 60
-
 var tween
+var pipesize = 60
+var speed = 1
+
+var highlighting = [0,0,0,0]
 
 signal flowed
 
@@ -33,6 +34,12 @@ func _ready():
         if ends[i]:
             part.show()
         i += 1
+    i = 0
+    for part in $Highlighting.get_children():
+        part.points[1].x = pipesize/2
+        if ends[i]:
+            part.show()
+        i += 1
     for part in $Flowingparts.get_children():
         part.points[1].x = pipesize/2
     $Base.size = Vector2.ONE*pipesize
@@ -46,16 +53,63 @@ func rotate_pipe(d=1):
     vdir += d
     if tween:
         tween.kill()
-    var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
-    tween.tween_property($Parts, "rotation", -vdir*PI/2,0.2)
-    tween.tween_property($Flowingparts, "rotation", -vdir*PI/2,0.2)
+    tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+    tween.parallel().tween_property($Highlighting, "rotation", -vdir*PI/2,0.2)
+    tween.parallel().tween_property($Parts, "rotation", -vdir*PI/2,0.2)
+    tween.parallel().tween_property($Flowingparts, "rotation", -vdir*PI/2,0.2)
 
         
 func kill_out(i):
     $Flowingparts.get_child((dir + i) % 4).default_color.a = 0.8
-        
+ 
+func get_flow_dirs():
+    var out = ends.duplicate()
+    for r in dir:
+        out.push_back(out.pop_front())
+    return out
+           
 
+func check_flow(i, t, d):
+    if flowing and cabletype != t:
+        return null
+    if ends[(dir + i) % 4]:
+        highlighting[t] = d
+        var out = ends.duplicate()
+        for r in dir:
+            out.push_back(out.pop_front())
+        return out
+    return null
 
+    
+func reset_highlight(types):
+    for i in types:
+        highlighting[i] = 0
+
+func set_highlight():
+    var color = Color(0,0,0,0)
+    if cabletype >= 0:
+        color = ccolors[cabletype]
+        color.v = 0.6
+        $Highlighting.modulate = color
+        return
+    var hsum = 0
+    for h in highlighting:
+        hsum += h
+    if hsum == 0:
+        $Highlighting.modulate.a = 0
+        return
+    for h in len(highlighting):
+        if highlighting[h] > 0:
+            var c = ccolors[h]
+            if hsum != highlighting[h]:
+                c.a = (hsum-highlighting[h])/float(hsum)
+            color = color.blend(c)
+    color.v = 0.6
+    color.a = 1
+    $Highlighting.modulate = color
+    
+    
+    
 func start_flow(i, t, speed):
     if ends[(dir + i) % 4] and not flowing:
         can_rotate = false
@@ -80,7 +134,7 @@ func start_flow(i, t, speed):
 
 func _process(delta):
     if flowing and flowtime < max_flow:
-        flowtime += delta
+        flowtime += delta * speed
         if Input.is_action_pressed("pipe_speedup"):
             flowtime += delta *10
         if flowtime >= max_flow:

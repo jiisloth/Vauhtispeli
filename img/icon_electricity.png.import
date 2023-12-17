@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://veibkled762l"
-path="res://.godot/imported/star.png-d9e21300bfdce2df88dc348114f24979.ctex"
+uid="uid://barhrmypmboru"
+path="res://.godot/imported/icon_electricity.png-bbdde8e9533a3c018e5a0012b16ee2bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/star.png"
-dest_files=["res://.godot/imported/star.png-d9e21300bfdce2df88dc348114f24979.ctex"]
+source_file="res://img/icon_electricity.png"
+dest_files=["res://.godot/imported/icon_electricity.png-bbdde8e9533a3c018e5a0012b16ee2bc.ctex"]
 
 [params]
 
