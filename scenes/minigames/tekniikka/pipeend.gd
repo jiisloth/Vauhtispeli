@@ -32,7 +32,11 @@ func set_blink(dt, t):
         $Parts.get_child(cabletype).modulate.v = 0.8 - sin(100*pow(a,5)+1)*0.2
     
 func get_flow_dirs():
-    return [1,1,1,1]
+    if start:
+        return [1,1,1,1]
+    else:
+        return [0,0,0,0]
+        
 
 
 func reset_highlight(t):
