@@ -1,24 +1,32 @@
 extends Node2D
 
 @export var game_prefab : PackedScene
+var phase_limits = [3,  7, 10, 15, 20,  30]
+var phase_delays = [5,  4,  4.5,  3, 2.5,  1.5]
+
 
 var rng = RandomNumberGenerator.new()
-enum {STAR_1, STAR_2, STAR_3}
-var phase = STAR_1
+const phases = 6
+var phase = 0
+var score = 3
 
-var time_when_next_spawn = 4
+var collected_boxes_win_limit = 30
+var collected_boxes = 0
+var spawned_boxes = 0
 
 func _ready():
-	pass
+	get_parent().set_score(score)
 
 func _process(delta):
 	
-	if phase == STAR_1:
-		pass
-	elif phase == STAR_2:
-		pass
-	elif phase == STAR_3:
-		pass
+	if spawned_boxes == phase_limits[phase]:
+		print(phase)
+		if phase == phases - 1:
+			pass
+		else:
+			phase += 1
+	if collected_boxes == collected_boxes_win_limit:
+		get_parent().end_game()
 
 func spawn_new_game(position, id):
 	var game = game_prefab.instantiate()
@@ -28,8 +36,9 @@ func spawn_new_game(position, id):
 		id = rng.randi_range(0, sprite.hframes - 1)
 	sprite.frame = id
 	game.id = id
-	game.movement_stop.connect(level_failed)
+	game.movement_stop.connect(decrease_score)
 	$Games.add_child(game)
+	spawned_boxes += 1
 	return game
 
 func _on_timer_timeout():
@@ -37,8 +46,14 @@ func _on_timer_timeout():
 		Vector2(rng.randf_range(0, 1920), 0),
 		null
 	)
-	$Timer.start(3)
+	$Timer.start(phase_delays[phase])
 	
-func level_failed():
-	# print("rippistä")
-	pass
+func decrease_score():
+	score -= 1
+	get_parent().set_score(score)
+	if score == 0:
+		get_parent().end_game()
+
+func add_collected():
+	collected_boxes += 1
+	$RichTextLabel.text = "Collected: " + str(collected_boxes)

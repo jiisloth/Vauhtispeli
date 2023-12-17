@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://co3ih2ailn7gj"]
+[gd_scene load_steps=18 format=3 uid="uid://co3ih2ailn7gj"]
 
 [ext_resource type="Script" path="res://scenes/minigames/sisalto/Viuhti.gd" id="1_arfwe"]
 [ext_resource type="Script" path="res://scenes/minigames/sisalto/sisalto.gd" id="1_pqpm0"]
@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://wkaeyl656b3s" path="res://scenes/minigames/sisalto/prefabs/game.tscn" id="2_lrv78"]
 [ext_resource type="Texture2D" uid="uid://82y7ibjoxjpi" path="res://img/viuhti_walk.png" id="4_qhw3q"]
 [ext_resource type="Texture2D" uid="uid://bp8xdtx41bds5" path="res://img/viuhti_walk_arm.png" id="5_6dsug"]
+[ext_resource type="PackedScene" uid="uid://d6g8frjl5nsd" path="res://scenes/minigames/sisalto/prefabs/ScreenWrap.tscn" id="5_edtpl"]
 [ext_resource type="Texture2D" uid="uid://depfhi2pmnucc" path="res://img/game_box_sheet.png" id="5_v6fn6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1gdw"]
+size = Vector2(107, 1008)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_30mpc"]
-size = Vector2(2211, 270)
+size = Vector2(2207.4, 129)
 
 [sub_resource type="Animation" id="Animation_fy35a"]
 length = 0.001
@@ -141,8 +145,17 @@ size = Vector2(118, 273.035)
 size = Vector2(106.76, 125.793)
 
 [node name="Sisalto" type="Node2D"]
+position = Vector2(-12, 3)
 script = ExtResource("1_pqpm0")
 game_prefab = ExtResource("2_lrv78")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 988.0
+offset_top = 21.0
+offset_right = 1288.0
+offset_bottom = 51.0
+scale = Vector2(5.00086, 4.10695)
+text = "Collected: 0"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -153,8 +166,16 @@ position = Vector2(621, 961)
 collision_layer = 4
 collision_mask = 7
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1367, -484)
+shape = SubResource("RectangleShape2D_r1gdw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
+position = Vector2(-666, -464)
+shape = SubResource("RectangleShape2D_r1gdw")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(335.5, 0)
+position = Vector2(335.5, 70.5)
 shape = SubResource("RectangleShape2D_30mpc")
 
 [node name="ColorRect" type="ColorRect" parent="Ground"]
@@ -164,7 +185,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -626.0
-offset_top = -134.0
+offset_top = 8.0
 offset_right = 1306.0
 offset_bottom = 134.0
 grow_horizontal = 2
@@ -175,7 +196,7 @@ color = Color(0.168627, 0.45098, 0.176471, 1)
 
 [node name="GameContainers" type="Node2D" parent="."]
 z_index = -10
-position = Vector2(296, 615)
+position = Vector2(296, 757)
 scale = Vector2(0.888476, 0.888476)
 
 [node name="Tasoloikat" parent="GameContainers" instance=ExtResource("2_euyie")]
@@ -198,10 +219,12 @@ priority = 3
 my_games = [3]
 
 [node name="Viuhti" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(482, 641)
+position = Vector2(974, 164)
 scale = Vector2(0.852461, 0.852461)
 collision_mask = 5
 script = ExtResource("1_arfwe")
+
+[node name="ScreenWrap" parent="Viuhti" instance=ExtResource("5_edtpl")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Viuhti"]
 libraries = {
@@ -227,7 +250,6 @@ position = Vector2(1.75439, 150.877)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Viuhti/GameCollisionArea"]
 position = Vector2(-1.75438, -21.8388)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ea1ef")
 
 [node name="GameHolder" type="Node2D" parent="Viuhti"]

@@ -3,7 +3,7 @@ extends RigidBody2D
 signal movement_stop
 const BOUNCE_LIMIT = 10
 var counter = 0
-var speed = 0.04
+var speed = 0.2
 var catchable = false
 var thrown = false
 var bounces = 0
@@ -22,9 +22,16 @@ func _process(delta):
 		$BoxArt.modulate = Color(1, 1 - counter, 1 - counter)
 	if counter > 1:
 		emit_signal("movement_stop")
+		queue_free()
 
 func _on_body_entered(body):
 	if body.name == "Ground":
 		bounces += 1
 		if in_box: 
 			queue_free()
+
+func go_to_box():
+	in_box = true
+	catchable = false
+	$BoxArt.z_index = -3
+	linear_velocity.x = 0

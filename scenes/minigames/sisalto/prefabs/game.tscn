@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://wkaeyl656b3s"]
+[gd_scene load_steps=7 format=3 uid="uid://wkaeyl656b3s"]
 
 [ext_resource type="Script" path="res://scenes/minigames/sisalto/prefabs/game.gd" id="1_mso2e"]
+[ext_resource type="PackedScene" uid="uid://d6g8frjl5nsd" path="res://scenes/minigames/sisalto/prefabs/ScreenWrap.tscn" id="2_avxpo"]
 [ext_resource type="Texture2D" uid="uid://depfhi2pmnucc" path="res://img/game_box_sheet.png" id="2_tewu1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_px81u"]
@@ -22,6 +23,8 @@ lock_rotation = true
 max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource("1_mso2e")
+
+[node name="ScreenWrap" parent="." instance=ExtResource("2_avxpo")]
 
 [node name="BoxArt" type="Sprite2D" parent="."]
 z_index = 1

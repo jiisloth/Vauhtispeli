@@ -9,7 +9,7 @@ const STOP_SPEED = 15
 const START_SPEED = 50
 const THROW_SPEED = 100
 const THROW_MAXSPEED = 600
-const THROW_VELOCITY_COEFFICIENT = 0.5
+const THROW_VELOCITY_COEFFICIENT = 0.2
 var throw_direction = 0
 
 var game_held = false
