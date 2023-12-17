@@ -1,40 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnxxajrwi0mc6"]
+[gd_scene load_steps=13 format=3 uid="uid://dnxxajrwi0mc6"]
 
 [ext_resource type="Script" path="res://scenes/minigames/tekniikka.gd" id="1_lbe26"]
 [ext_resource type="PackedScene" uid="uid://n2ipg2vdaewo" path="res://scenes/minigames/tekniikka/pipe.tscn" id="2_urs38"]
 [ext_resource type="PackedScene" uid="uid://cs40cic4peie2" path="res://scenes/minigames/tekniikka/pipeend.tscn" id="3_68ad2"]
 [ext_resource type="PackedScene" uid="uid://cjfamor7x2tmf" path="res://scenes/minigames/tekniikka/pipecursor.tscn" id="4_xqnjb"]
+[ext_resource type="Texture2D" uid="uid://barhrmypmboru" path="res://img/icon_electricity.png" id="5_wpgyo"]
+[ext_resource type="Texture2D" uid="uid://3g1qi814177d" path="res://img/icon_video.png" id="6_20df4"]
+[ext_resource type="Texture2D" uid="uid://bsklvd3x1k8uw" path="res://img/icon_sound_R.png" id="7_sa0aw"]
+[ext_resource type="Texture2D" uid="uid://b25j2qb1o5tra" path="res://img/icon_sound_L.png" id="8_m5dvf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hohdy"]
-bg_color = Color(0, 0, 1, 1)
+bg_color = Color(0.262745, 0.364706, 0.835294, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvk55"]
-bg_color = Color(1, 1, 0, 1)
+bg_color = Color(0.854902, 0.745098, 0.188235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqux5"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(0.8, 0.141176, 0.180392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwg2k"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.913725, 0.913725, 0.913725, 1)
 
 [node name="Tekniikka" type="Node2D"]
 script = ExtResource("1_lbe26")
 Pipe = ExtResource("2_urs38")
 PipeEnd = ExtResource("3_68ad2")
 
-[node name="Test" type="Label" parent="."]
-offset_left = 172.0
-offset_top = 129.0
-offset_right = 253.0
-offset_bottom = 152.0
-text = "This is a tekiinka game
-"
-
 [node name="PipeHolder" type="Node2D" parent="."]
 position = Vector2(96, 224)
 
 [node name="Pipecursor" parent="PipeHolder" instance=ExtResource("4_xqnjb")]
 width = 6.0
+default_color = Color(0.196078, 0.803922, 0.196078, 1)
 
 [node name="Timers" type="VBoxContainer" parent="."]
 offset_left = 1312.0
@@ -54,7 +51,12 @@ layout_mode = 2
 offset_top = -27.0
 offset_right = 40.0
 offset_bottom = -4.0
-text = "ASD1"
+text = "Sähkö"
+
+[node name="IconElectricity" type="Sprite2D" parent="Timers/ProgressBar"]
+position = Vector2(-44, 17)
+scale = Vector2(0.131, 0.131)
+texture = ExtResource("5_wpgyo")
 
 [node name="ProgressBar2" type="ProgressBar" parent="Timers"]
 custom_minimum_size = Vector2(0, 50)
@@ -67,7 +69,12 @@ layout_mode = 2
 offset_top = -27.0
 offset_right = 40.0
 offset_bottom = -4.0
-text = "ASD2"
+text = "Video"
+
+[node name="IconElectricity" type="Sprite2D" parent="Timers/ProgressBar2"]
+position = Vector2(-44, 17)
+scale = Vector2(0.131, 0.131)
+texture = ExtResource("6_20df4")
 
 [node name="ProgressBar3" type="ProgressBar" parent="Timers"]
 custom_minimum_size = Vector2(0, 50)
@@ -80,7 +87,12 @@ layout_mode = 2
 offset_top = -27.0
 offset_right = 40.0
 offset_bottom = -4.0
-text = "ASD3"
+text = "Audio R"
+
+[node name="IconElectricity" type="Sprite2D" parent="Timers/ProgressBar3"]
+position = Vector2(-44, 17)
+scale = Vector2(0.131, 0.131)
+texture = ExtResource("7_sa0aw")
 
 [node name="ProgressBar4" type="ProgressBar" parent="Timers"]
 custom_minimum_size = Vector2(0, 50)
@@ -93,7 +105,12 @@ layout_mode = 2
 offset_top = -27.0
 offset_right = 40.0
 offset_bottom = -4.0
-text = "ASD3"
+text = "Audio L"
+
+[node name="IconElectricity" type="Sprite2D" parent="Timers/ProgressBar4"]
+position = Vector2(-44, 17)
+scale = Vector2(0.131, 0.131)
+texture = ExtResource("8_m5dvf")
 
 [connection signal="moved" from="PipeHolder/Pipecursor" to="." method="_on_pipecursor_moved"]
 [connection signal="rotate_pipe" from="PipeHolder/Pipecursor" to="." method="_on_pipecursor_rotate_pipe"]

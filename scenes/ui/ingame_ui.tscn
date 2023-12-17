@@ -1,56 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcxcku1aoctw4"]
+[gd_scene load_steps=5 format=3 uid="uid://bcxcku1aoctw4"]
 
 [ext_resource type="Script" path="res://scenes/ui/ingame_ui.gd" id="1_2rcg2"]
 [ext_resource type="Texture2D" uid="uid://bxaw7ycgeauja" path="res://img/ui_mockup.png" id="1_r50mt"]
-[ext_resource type="Texture2D" uid="uid://dqeyb8gdhqv2g" path="res://img/star.png" id="3_fn2ug"]
+[ext_resource type="Texture2D" uid="uid://veibkled762l" path="res://img/star.png" id="3_fn2ug"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qec2i"]
+font_size = 42
 
 [node name="IngameUI" type="CanvasLayer"]
 script = ExtResource("1_2rcg2")
 
 [node name="UiMockup" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(1440, 540)
 texture = ExtResource("1_r50mt")
+hframes = 2
+frame = 1
 
 [node name="Test" type="Label" parent="."]
-visible = false
-offset_left = 465.0
-offset_top = 341.0
-offset_right = 505.0
-offset_bottom = 364.0
-text = "This is a ui"
+offset_left = 1776.0
+offset_top = 195.0
+offset_right = 1907.0
+offset_bottom = 253.0
+text = "1000 €"
+label_settings = SubResource("LabelSettings_qec2i")
 
 [node name="Stars" type="HBoxContainer" parent="."]
-offset_left = 54.0
-offset_top = 6.0
-offset_right = 632.0
-offset_bottom = 206.0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 524.0
+offset_bottom = 191.0
+theme_override_constants/separation = 0
 
 [node name="Star" type="CenterContainer" parent="Stars"]
-custom_minimum_size = Vector2(175, 200)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="Stars/Star"]
 layout_mode = 2
 
 [node name="Star" type="Sprite2D" parent="Stars/Star/Control"]
+scale = Vector2(0.36, 0.36)
 texture = ExtResource("3_fn2ug")
 
 [node name="Star2" type="CenterContainer" parent="Stars"]
-custom_minimum_size = Vector2(175, 200)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="Stars/Star2"]
 layout_mode = 2
 
 [node name="Star" type="Sprite2D" parent="Stars/Star2/Control"]
+scale = Vector2(0.36, 0.36)
 texture = ExtResource("3_fn2ug")
 
 [node name="Star3" type="CenterContainer" parent="Stars"]
-custom_minimum_size = Vector2(175, 200)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="Stars/Star3"]
 layout_mode = 2
 
 [node name="Star" type="Sprite2D" parent="Stars/Star3/Control"]
+scale = Vector2(0.36, 0.36)
 texture = ExtResource("3_fn2ug")

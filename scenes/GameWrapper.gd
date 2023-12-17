@@ -4,9 +4,12 @@ extends Node2D
 var current_game = null
 
 
-func set_score(score):
-    $IngameUI.set_score(score)
-    $GameScore.set_score(score)
+
+func set_score(score, potential_score=3):
+    if potential_score <= 0:
+        $GameOver.show()
+    $IngameUI.set_score(score, potential_score)
+    $GameScore.set_score(score, potential_score)
     
 
 func set_game(g):
@@ -18,11 +21,12 @@ func set_game(g):
         
     current_game = load(Game.games[g]["scene"]).instantiate()
     $GameScore.setup_game(Game.games[g])
+    $GameOver.setup_game(Game.games[g])
     $IngameUI.setup_game(Game.games[g])
     add_child(current_game)
     
 
 func end_game():
-    $IngameUI.hide()
+    $IngameUI.hide_score()
     $GameScore.show()
     
