@@ -18,7 +18,7 @@ var games = {
         "color": Color("#fcad03")
         },
     SISALTO: {
-        "scene": "res://scenes/minigames/sisalto.tscn",
+        "scene": "res://scenes/minigames/sisalto/sisalto.tscn",
         "display_name": "Sisältö",
         "color": Color("#fcad03")
         },

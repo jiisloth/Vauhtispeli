@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d6g8frjl5nsd"]
+
+[ext_resource type="Script" path="res://scenes/minigames/sisalto/prefabs/ScreenWrap.gd" id="1_u8qaa"]
+
+[node name="ScreenWrap" type="Node2D"]
+script = ExtResource("1_u8qaa")
