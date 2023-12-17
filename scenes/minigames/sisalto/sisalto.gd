@@ -5,6 +5,7 @@ extends Node2D
 
 var phase_limits = [3,  7, 10, 15, 20,  30]
 var phase_delays = [5,  4,  4.5,  3, 2.5,  1.5]
+
 @export var container_games = [
 	[0],
 	[1],
@@ -21,7 +22,11 @@ var phase_delays = [5,  4,  4.5,  3, 2.5,  1.5]
 var rng = RandomNumberGenerator.new()
 const phases = 6
 var phase = 0
-var score = 3
+var score = 0
+var potential_score = 3
+
+var score_phase = 0
+var collected_boxes_score_limits = [10, 20, 30]
 
 var collected_boxes_win_limit = 30
 var collected_boxes = 0
@@ -47,8 +52,6 @@ func _process(delta):
 			pass
 		else:
 			phase += 1
-	if collected_boxes == collected_boxes_win_limit:
-		game_wrapper.end_game()
 
 func spawn_new_game(position, id):
 	var game = game_prefab.instantiate()
@@ -72,10 +75,12 @@ func _on_timer_timeout():
 	$Timer.start(phase_delays[phase])
 	
 func decrease_score():
-	score -= 1
-	game_wrapper.set_score(score)
-	if score == 0:
-		game_wrapper.end_game()
+	potential_score -= 1
+	game_wrapper.set_score(score, potential_score)
+
+func add_score():
+	score += 1
+	game_wrapper.set_score(score, potential_score)
 
 func remove_container():
 	active_containers -= 1
@@ -85,6 +90,11 @@ func remove_container():
 func add_collected():
 	collected_boxes += 1
 	$RichTextLabel.text = "Collected: " + str(collected_boxes) + "/" + str(collected_boxes_win_limit)
-	print($Timer.time_left)
 	if $Timer.time_left > 2:
 		$Timer.emit_signal("timeout")
+
+	if collected_boxes == collected_boxes_score_limits[score_phase]:
+		score_phase += 1
+		add_score()
+	if collected_boxes == collected_boxes_win_limit:
+		game_wrapper.end_game()
