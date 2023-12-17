@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://3tqmjk4qxbyp"]
+
+[node name="koodia_Controller_Scheme" type="Node"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 495.0
+offset_top = 658.0
+offset_right = 629.0
+offset_bottom = 727.0
+theme_override_font_sizes/font_size = 50
+text = "Text1"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 667.0
+offset_top = 789.0
+offset_right = 801.0
+offset_bottom = 858.0
+theme_override_font_sizes/font_size = 50
+text = "Text2"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 343.0
+offset_top = 770.0
+offset_right = 477.0
+offset_bottom = 839.0
+theme_override_font_sizes/font_size = 50
+text = "Text3"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 496.0
+offset_top = 906.0
+offset_right = 630.0
+offset_bottom = 975.0
+theme_override_font_sizes/font_size = 50
+text = "Text4"
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 1221.0
+offset_top = 671.0
+offset_right = 1355.0
+offset_bottom = 740.0
+theme_override_font_sizes/font_size = 50
+text = "Text5"
+
+[node name="Label6" type="Label" parent="."]
+offset_left = 1424.0
+offset_top = 783.0
+offset_right = 1558.0
+offset_bottom = 852.0
+theme_override_font_sizes/font_size = 50
+text = "Text6"
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 1053.0
+offset_top = 777.0
+offset_right = 1187.0
+offset_bottom = 846.0
+theme_override_font_sizes/font_size = 50
+text = "Text7"
+
+[node name="Label8" type="Label" parent="."]
+offset_left = 1233.0
+offset_top = 927.0
+offset_right = 1367.0
+offset_bottom = 996.0
+theme_override_font_sizes/font_size = 50
+text = "Text8"
+
+[node name="Label9" type="Label" parent="."]
+offset_left = 294.0
+offset_top = 518.0
+offset_right = 428.0
+offset_bottom = 587.0
+theme_override_font_sizes/font_size = 50
+text = "Text9"
+
+[node name="Label10" type="Label" parent="."]
+offset_left = 1443.0
+offset_top = 554.0
+offset_right = 1606.0
+offset_bottom = 623.0
+theme_override_font_sizes/font_size = 50
+text = "Text10"

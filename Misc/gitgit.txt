@@ -6,3 +6,26 @@ git reset --HARD head
 int input = get(controller_input)
 string player_string = get_string(buffer[0])
 void add_number(int input, double number)
+comp_size = Vector2(0, 0)
+for child in hbox.get_children():
+comp_size += child.size
+hbox.position.x = abs(comp_size.x - get_viewport().size.x)/2
+hbox.position.y = 250
+hbox_aligned = true
+func assign_words_to_buttons():
+var indexes = range(0, 10)
+var used = []
+var available_words = words.duplicate()
+for line in wanted_line:
+if line not in used:
+var b_index = indexes.pick_random()
+indexes.erase(b_index)
+print(indexes)
+buttons[b_index].text = line
+used.append(line)
+available_words.erase(line)
+for b_index in indexes:
+if buttons[b_index].text not in wanted_line:
+var nu_word = available_words.pick_random()
+available_words.erase(nu_word)
+buttons[b_index].text = nu_word
