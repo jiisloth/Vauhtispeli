@@ -244,14 +244,15 @@ position = Vector2(0, 49.1228)
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Viuhti/GameHolder/HeldGame"]
+clip_children = 2
 offset_left = 46.0
 offset_top = -56.0
 offset_right = 126.0
 offset_bottom = 67.0
 
-[node name="BoxArt" type="Sprite2D" parent="Viuhti/GameHolder/HeldGame"]
-position = Vector2(84.4613, -15.1037)
-scale = Vector2(0.2512, 0.243703)
+[node name="BoxArt" type="Sprite2D" parent="Viuhti/GameHolder/HeldGame/ColorRect"]
+position = Vector2(41.9806, 35.031)
+scale = Vector2(0.495037, 0.480263)
 texture = ExtResource("9_wbol6")
 hframes = 4
 

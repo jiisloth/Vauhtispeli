@@ -56,7 +56,7 @@ func _process(delta):
 func spawn_new_game(position, id):
 	var game = game_prefab.instantiate()
 	game.position = position
-	var sprite = game.get_node("BoxArt")
+	var sprite = game.get_node("ColorRect/BoxArt")
 	if id == null:
 		id = rng.randi_range(0, sprite.hframes - 1)
 	sprite.frame = id
@@ -85,16 +85,16 @@ func add_score():
 func remove_container():
 	active_containers -= 1
 	if active_containers == 0:
-		game_wrapper.end_game()
+		game_wrapper.game_over()
 
 func add_collected():
 	collected_boxes += 1
 	$RichTextLabel.text = "Collected: " + str(collected_boxes) + "/" + str(collected_boxes_win_limit)
-	if $Timer.time_left > 2:
-		$Timer.emit_signal("timeout")
+	# if $Timer.time_left > 2:
+	#	$Timer.emit_signal("timeout")
 
 	if collected_boxes == collected_boxes_score_limits[score_phase]:
 		score_phase += 1
 		add_score()
 	if collected_boxes == collected_boxes_win_limit:
-		game_wrapper.end_game()
+		game_wrapper.win_game()

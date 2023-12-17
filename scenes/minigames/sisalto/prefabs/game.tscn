@@ -27,6 +27,7 @@ script = ExtResource("1_mso2e")
 [node name="ScreenWrap" parent="." instance=ExtResource("2_avxpo")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+clip_children = 2
 z_as_relative = false
 offset_left = -45.0
 offset_top = -66.0
@@ -34,11 +35,9 @@ offset_right = 45.0
 offset_bottom = 65.0
 color = Color(0.584314, 0.360784, 0.419608, 1)
 
-[node name="BoxArt" type="Sprite2D" parent="."]
-z_index = 1
-z_as_relative = false
-position = Vector2(0, -17)
-scale = Vector2(0.270311, 0.198549)
+[node name="BoxArt" type="Sprite2D" parent="ColorRect"]
+position = Vector2(43, 42)
+scale = Vector2(0.439, 0.439)
 texture = ExtResource("3_bgqxv")
 hframes = 4
 
