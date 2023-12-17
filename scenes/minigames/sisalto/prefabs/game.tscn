@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/minigames/sisalto/prefabs/game.gd" id="1_mso2e"]
 [ext_resource type="PackedScene" uid="uid://d6g8frjl5nsd" path="res://scenes/minigames/sisalto/prefabs/ScreenWrap.tscn" id="2_avxpo"]
-[ext_resource type="Texture2D" uid="uid://depfhi2pmnucc" path="res://img/game_box_sheet.png" id="2_tewu1"]
+[ext_resource type="Texture2D" uid="uid://divh7elbwq6jf" path="res://img/game_labels.png" id="3_bgqxv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_px81u"]
 bounce = 0.7
@@ -26,11 +26,20 @@ script = ExtResource("1_mso2e")
 
 [node name="ScreenWrap" parent="." instance=ExtResource("2_avxpo")]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_as_relative = false
+offset_left = -45.0
+offset_top = -66.0
+offset_right = 45.0
+offset_bottom = 65.0
+color = Color(0.584314, 0.360784, 0.419608, 1)
+
 [node name="BoxArt" type="Sprite2D" parent="."]
 z_index = 1
 z_as_relative = false
-scale = Vector2(2.81, 2.064)
-texture = ExtResource("2_tewu1")
+position = Vector2(0, -17)
+scale = Vector2(0.270311, 0.198549)
+texture = ExtResource("3_bgqxv")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

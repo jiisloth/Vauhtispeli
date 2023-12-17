@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://82y7ibjoxjpi" path="res://img/viuhti_walk.png" id="4_qhw3q"]
 [ext_resource type="Texture2D" uid="uid://bp8xdtx41bds5" path="res://img/viuhti_walk_arm.png" id="5_6dsug"]
 [ext_resource type="PackedScene" uid="uid://d6g8frjl5nsd" path="res://scenes/minigames/sisalto/prefabs/ScreenWrap.tscn" id="5_edtpl"]
-[ext_resource type="Texture2D" uid="uid://depfhi2pmnucc" path="res://img/game_box_sheet.png" id="5_v6fn6"]
+[ext_resource type="Texture2D" uid="uid://divh7elbwq6jf" path="res://img/game_labels.png" id="9_wbol6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1gdw"]
 size = Vector2(107, 1008)
@@ -157,7 +157,7 @@ offset_top = 21.0
 offset_right = 1288.0
 offset_bottom = 51.0
 scale = Vector2(5.00086, 4.10695)
-text = "Collected: 0"
+text = "Collected: 0/30"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -171,10 +171,12 @@ collision_mask = 7
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Ground"]
 position = Vector2(1367, -484)
 shape = SubResource("RectangleShape2D_r1gdw")
+disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
 position = Vector2(-666, -464)
 shape = SubResource("RectangleShape2D_r1gdw")
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(335.5, 70.5)
@@ -238,11 +240,19 @@ shape = SubResource("RectangleShape2D_ea1ef")
 [node name="GameHolder" type="Node2D" parent="Viuhti"]
 position = Vector2(0, 49.1228)
 
-[node name="HeldGame" type="Sprite2D" parent="Viuhti/GameHolder"]
+[node name="HeldGame" type="Node2D" parent="Viuhti/GameHolder"]
 visible = false
-position = Vector2(84.2106, 5.26306)
-scale = Vector2(2.41228, 1.91885)
-texture = ExtResource("5_v6fn6")
+
+[node name="ColorRect" type="ColorRect" parent="Viuhti/GameHolder/HeldGame"]
+offset_left = 46.0
+offset_top = -56.0
+offset_right = 126.0
+offset_bottom = 67.0
+
+[node name="BoxArt" type="Sprite2D" parent="Viuhti/GameHolder/HeldGame"]
+position = Vector2(84.4613, -15.1037)
+scale = Vector2(0.2512, 0.243703)
+texture = ExtResource("9_wbol6")
 hframes = 4
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

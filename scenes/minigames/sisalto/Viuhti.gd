@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 600.0
 const JUMP_VELOCITY = -2.5 * 600.0
 const throw_force = 2000
-const DRIFT_SPEED = 20
+const DRIFT_SPEED = 30
 const STOP_SPEED = 15
 const START_SPEED = 50
 const THROW_SPEED = 100
@@ -73,11 +73,12 @@ func _process(delta):
 	if game_held:
 		if Input.is_action_just_pressed("shoot"):
 			release_game()
-	queue_redraw()
+	# queue_redraw()
 
 func pick_up_game(game_box):
 	$GameCollisionArea.set_deferred("monitoring",false)
-	$GameHolder/HeldGame.frame = game_box.get_node("BoxArt").frame
+	$GameHolder/HeldGame/BoxArt.frame = game_box.get_node("BoxArt").frame
+	$GameHolder/HeldGame/ColorRect.color = game_box.get_node("ColorRect").color
 	$GameHolder/HeldGame.visible = true
 	game_held = true
 	
@@ -87,7 +88,7 @@ func release_game():
 	$GameHolder/HeldGame.visible = false
 	var new_game = get_parent().spawn_new_game(
 		$GameCollisionArea.global_position,
-		$GameHolder/HeldGame.frame	
+		$GameHolder/HeldGame/BoxArt.frame	
 	)
 	new_game.thrown = true
 	new_game.linear_velocity = Vector2(

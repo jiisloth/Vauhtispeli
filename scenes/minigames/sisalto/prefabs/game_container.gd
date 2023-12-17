@@ -12,7 +12,7 @@ func _ready():
 
 func set_container_color():
 	var col = 1 - wrong_games_collected / wrong_game_limit
-	var box_color = Color(1, col, col)
+	var box_color = Color(col, col, col)
 	modulate = box_color
 
 func collect_wrong_game():

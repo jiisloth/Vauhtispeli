@@ -4,7 +4,7 @@ extends Node2D
 @export var game_container_prefab : PackedScene
 
 var phase_limits = [3,  7, 10, 15, 20,  30]
-var phase_delays = [5,  4,  4.5,  3, 2.5,  1.8]
+var phase_delays = [5,  4,  4.5,  3, 2.5,  1.5]
 @export var container_games = [
 	[0],
 	[1],
@@ -58,6 +58,7 @@ func spawn_new_game(position, id):
 		id = rng.randi_range(0, sprite.hframes - 1)
 	sprite.frame = id
 	game.id = id
+	game.get_node("ColorRect").color = container_colors[id]
 	game.movement_stop.connect(decrease_score)
 	$Games.add_child(game)
 	spawned_boxes += 1
@@ -83,4 +84,7 @@ func remove_container():
 
 func add_collected():
 	collected_boxes += 1
-	$RichTextLabel.text = "Collected: " + str(collected_boxes)
+	$RichTextLabel.text = "Collected: " + str(collected_boxes) + "/" + str(collected_boxes_win_limit)
+	print($Timer.time_left)
+	if $Timer.time_left > 2:
+		$Timer.emit_signal("timeout")
