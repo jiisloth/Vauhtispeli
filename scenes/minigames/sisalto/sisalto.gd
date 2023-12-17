@@ -1,9 +1,22 @@
 extends Node2D
 
 @export var game_prefab : PackedScene
+@export var game_container_prefab : PackedScene
+
 var phase_limits = [3,  7, 10, 15, 20,  30]
 var phase_delays = [5,  4,  4.5,  3, 2.5,  1.8]
-
+@export var container_games = [
+	[0],
+	[1],
+	[2],
+	[3]
+]
+@export var container_colors = [
+	Color(0,0,0),
+	Color(0,0,0),
+	Color(0,0,0),
+	Color(0,0,0)
+]
 
 var rng = RandomNumberGenerator.new()
 const phases = 6
@@ -14,19 +27,28 @@ var collected_boxes_win_limit = 30
 var collected_boxes = 0
 var spawned_boxes = 0
 var active_containers = 4
+var game_wrapper
 
 func _ready():
-	get_parent().set_score(score)
+	game_wrapper = get_parent()
+	for i in 4:
+		var game_cont = game_container_prefab.instantiate()
+		game_cont.position = Vector2(i * 500, 0)
+		$GameContainers.add_child(game_cont)
+		game_cont.get_node("Label").frame = i
+		game_cont.my_games = container_games[i]
+		game_cont.get_node("BoxBackground").modulate = container_colors[i]
+		game_cont.get_node("BoxForeground").modulate = container_colors[i]
+	game_wrapper.set_score(score)
 
 func _process(delta):
-	
 	if spawned_boxes == phase_limits[phase]:
 		if phase == phases - 1:
 			pass
 		else:
 			phase += 1
 	if collected_boxes == collected_boxes_win_limit:
-		get_parent().end_game()
+		game_wrapper.end_game()
 
 func spawn_new_game(position, id):
 	var game = game_prefab.instantiate()
@@ -50,14 +72,14 @@ func _on_timer_timeout():
 	
 func decrease_score():
 	score -= 1
-	get_parent().set_score(score)
+	game_wrapper.set_score(score)
 	if score == 0:
-		get_parent().end_game()
+		game_wrapper.end_game()
 
 func remove_container():
 	active_containers -= 1
 	if active_containers == 0:
-		get_parent().end_game()
+		game_wrapper.end_game()
 
 func add_collected():
 	collected_boxes += 1

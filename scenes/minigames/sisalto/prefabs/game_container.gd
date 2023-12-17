@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 @export var my_games = [0]
 
@@ -13,11 +13,17 @@ func _ready():
 func set_container_color():
 	var col = 1 - wrong_games_collected / wrong_game_limit
 	var box_color = Color(1, col, col)
-	$BoxForeground.modulate = box_color
-	$BoxBackground.modulate = box_color
+	modulate = box_color
+
+func collect_wrong_game():
+	wrong_games_collected += 1
+	set_container_color()
+	if wrong_games_collected == wrong_game_limit:
+		destroy_container()
 
 func destroy_container():
-	$CollisionShape2D.disabled = true
+	print("del")
+	set_deferred("monitoring", false)
 	sisalto.remove_container()
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
@@ -27,8 +33,5 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 			correct_games_collected += 1
 			sisalto.add_collected()
 		else:
-			wrong_games_collected += 1
-			set_container_color()
-		if wrong_games_collected == wrong_game_limit:
-			destroy_container()
+			collect_wrong_game()
 		game_box.go_to_box()

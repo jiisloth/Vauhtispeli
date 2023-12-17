@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqhairiy7f7tn"]
+[gd_scene load_steps=6 format=3 uid="uid://cqhairiy7f7tn"]
 
 [ext_resource type="Script" path="res://scenes/minigames/sisalto/prefabs/game_container.gd" id="1_7flvx"]
 [ext_resource type="Texture2D" uid="uid://b77flmyb6we00" path="res://img/box_back.png" id="2_s36vd"]
 [ext_resource type="Texture2D" uid="uid://ccmksmp2ryfxa" path="res://img/box_front.png" id="3_rwyis"]
+[ext_resource type="Texture2D" uid="uid://divh7elbwq6jf" path="res://img/game_labels.png" id="4_3pq2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_linut"]
 size = Vector2(172, 59.5)
@@ -24,5 +25,11 @@ texture = ExtResource("3_rwyis")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, -251)
 shape = SubResource("RectangleShape2D_linut")
+
+[node name="Label" type="Sprite2D" parent="."]
+z_index = -1
+z_as_relative = false
+texture = ExtResource("4_3pq2k")
+hframes = 4
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
