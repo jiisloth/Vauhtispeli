@@ -11,6 +11,7 @@ const THROW_SPEED = 100
 const THROW_MAXSPEED = 600
 const THROW_VELOCITY_COEFFICIENT = 0.2
 var throw_direction = 0
+var throw_velocity = 0
 
 var game_held = false
 var heldgame
@@ -40,7 +41,14 @@ func _physics_process(delta):
 		if is_on_floor():
 			$AnimationPlayer.play("viuhti_side_stop")
 		velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
-		throw_direction = 0
+		throw_direction = move_toward(throw_direction, 0, 50)
+	
+	if Input.is_action_pressed("ui_up"):
+		throw_velocity = 0 #move_toward(
+#			throw_velocity, 0, THROW_SPEED)
+	else:
+		throw_velocity = throw_direction + velocity.x * THROW_VELOCITY_COEFFICIENT
+	
 	$AnimationPlayer.speed_scale = 1 + abs(velocity.x)/SPEED * 2
 	
 	if direction < 0:
@@ -65,7 +73,7 @@ func _process(delta):
 	if game_held:
 		if Input.is_action_just_pressed("shoot"):
 			release_game()
-	# queue_redraw()
+	queue_redraw()
 
 func pick_up_game(game_box):
 	$GameCollisionArea.set_deferred("monitoring",false)
@@ -82,7 +90,9 @@ func release_game():
 		$GameHolder/HeldGame.frame	
 	)
 	new_game.thrown = true
-	new_game.linear_velocity = Vector2(throw_direction + velocity.x * THROW_VELOCITY_COEFFICIENT, -throw_force)
+	new_game.linear_velocity = Vector2(
+		throw_velocity, -throw_force
+	)
 	game_held = false
 
 func _on_game_collision_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):

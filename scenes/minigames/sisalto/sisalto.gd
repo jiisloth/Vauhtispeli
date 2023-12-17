@@ -2,7 +2,7 @@ extends Node2D
 
 @export var game_prefab : PackedScene
 var phase_limits = [3,  7, 10, 15, 20,  30]
-var phase_delays = [5,  4,  4.5,  3, 2.5,  1.5]
+var phase_delays = [5,  4,  4.5,  3, 2.5,  1.8]
 
 
 var rng = RandomNumberGenerator.new()
@@ -13,6 +13,7 @@ var score = 3
 var collected_boxes_win_limit = 30
 var collected_boxes = 0
 var spawned_boxes = 0
+var active_containers = 4
 
 func _ready():
 	get_parent().set_score(score)
@@ -20,7 +21,6 @@ func _ready():
 func _process(delta):
 	
 	if spawned_boxes == phase_limits[phase]:
-		print(phase)
 		if phase == phases - 1:
 			pass
 		else:
@@ -52,6 +52,11 @@ func decrease_score():
 	score -= 1
 	get_parent().set_score(score)
 	if score == 0:
+		get_parent().end_game()
+
+func remove_container():
+	active_containers -= 1
+	if active_containers == 0:
 		get_parent().end_game()
 
 func add_collected():
