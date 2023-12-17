@@ -150,7 +150,7 @@ func pipe_complete(t):
     score += 1
     get_parent().set_score(max(0,score), potential_score)
     if score == potential_score:
-        get_parent().end_game()
+        get_parent().win_game()
     
         
             

@@ -22,7 +22,7 @@ func set_score(score=0,potential_score=3):
         else:
             star.modulate = gameinfo["color"]
             star.modulate.s = 0.3
-            star.modulate.v = 0.8
+            star.modulate.v = 0.2
         if potential_score > i:
             sprite.position = Vector2.ZERO
             sprite.rotation = 0
