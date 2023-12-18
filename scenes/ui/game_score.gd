@@ -12,30 +12,34 @@ func setup_game(ginfo):
     
 func set_score(score=0, potential_score=3):
     var stars = $VBoxContainer/Stars.get_children()
-    var i = 0
     for star in stars:
-        if score > i:
-            star.modulate = gameinfo["color"]
-        else:
-            star.modulate = Color("#000000")
-        i += 1
+        star.modulate = gameinfo["color"]
+        star.show()
     match potential_score:
         3:
-            $VBoxContainer/Stars/Star.show()
-            $VBoxContainer/Stars/Star2.show()
-            $VBoxContainer/Stars/Star3.show()
+            match score:
+                2:  
+                    dim_star(stars[2])
+                1:
+                    dim_star(stars[2])
+                    dim_star(stars[1])
         2:
-            $VBoxContainer/Stars/Star.show()
-            $VBoxContainer/Stars/Star2.hide()
-            $VBoxContainer/Stars/Star3.show()
-        1:
-            $VBoxContainer/Stars/Star.hide()
-            $VBoxContainer/Stars/Star2.show()
-            $VBoxContainer/Stars/Star3.hide()
-        0:
-            $VBoxContainer/Stars/Star.hide()
-            $VBoxContainer/Stars/Star2.hide()
-            $VBoxContainer/Stars/Star3.hide()
+            stars[1].hide()
+            match score:
+                1:
+                    dim_star(stars[2])
             
+        1:
+            stars[0].hide()
+            stars[2].hide()
+        0:
+            stars[0].hide()
+            stars[1].hide()
+            stars[2].hide()
+
+
+func dim_star(star):
+    star.modulate.v = 0.2
+    star.modulate.s = 0.3
             
     

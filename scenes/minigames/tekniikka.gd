@@ -25,8 +25,12 @@ var flowpoints = [[],[],[],[]]
 var flows = [1,1,1,1]
 var do_inputs = true
 var speed = 1
+var completed = [false,false,false,false]
 
 func _ready():
+    var rseed = randi()
+    print(rseed)
+    seed(rseed)
     make_level()
     check_paths()
     $PipeHolder/Pipecursor.gamesize = Vector2i(gamesize)
@@ -124,7 +128,7 @@ func make_path():
         start = randi()%int(gamesize.x*gamesize.y)
         stop = randi()%int(gamesize.x*gamesize.y)
     var path = astar.get_id_path(start,stop)
-    if len(path) > 2:
+    if len(path) > 2 and len(path) < gamesize.x*1.5:
         var blocks = []
         for f in 5:
             var block = path[1+randi()%len(path)-3]
@@ -147,10 +151,12 @@ func make_path():
     return false
             
 func pipe_complete(t):
-    score += 1
-    get_parent().set_score(max(0,score), potential_score)
-    if score == potential_score:
-        get_parent().win_game()
+    if not completed[t]:
+        completed[t] = true
+        score += 1
+        get_parent().set_score(max(0,score), potential_score)
+        if score == potential_score:
+            get_parent().win_game()
     
         
             
@@ -174,11 +180,14 @@ func pipe_out_flow(coords, output, outtype):
                 flows[outtype] -= 1
     if flows[outtype] == 0:
         potential_score -= 1
+        set_failed(outtype)
         get_parent().set_score(max(0,score), potential_score)
-        print(str(outtype) + " stopped flowing")
     check_paths([outtype])
     
-
+    
+func set_failed(outtype):
+    for p in pipes.keys():
+        pipes[p].set_failed(outtype)
     
                 
 func start_flow(i):
@@ -242,7 +251,7 @@ func check_paths(types=[0,1,2,3]):
                     ready_pipes[out] = true
     var rdy = true
     for p in 4:
-        if not ready_pipes[p] and flows[p] > 0:
+        if not ready_pipes[p] and flows[p] > 0 and not completed[p]:
             rdy = false
     if rdy:
         set_turbospeed()   

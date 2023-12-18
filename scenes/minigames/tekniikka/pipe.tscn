@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/minigames/tekniikka/pipe.gd" id="1_1ue2k"]
 
 [node name="Pipe" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_1ue2k")
 
 [node name="Base" type="ColorRect" parent="."]

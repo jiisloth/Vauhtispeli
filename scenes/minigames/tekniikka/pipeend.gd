@@ -51,8 +51,18 @@ func set_highlight():
 func check_flow(i,t,d):
     if not start:
         coming_flows[t][i] = d
-    
+
+
+func set_failed(t):
+    if start and t == cabletype:
+        $Parts.modulate.s = 0.5
+        var tw = create_tween().set_ease(Tween.EASE_IN_OUT)
+        for i in 10:
+            tw.chain().tween_property($Parts, "modulate:v", 0.3, 0.1+ i/100.0) 
+            tw.chain().tween_property($Parts, "modulate:v", 1 - i/20.0, 0.1+ i/100.0) 
+        tw.chain().tween_property($Parts, "modulate:v", 0.3, 0.1+ 10/100.0) 
          
+        
 func kill_out(i):
     pass
 

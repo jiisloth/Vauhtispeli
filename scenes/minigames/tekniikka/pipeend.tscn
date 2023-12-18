@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b25j2qb1o5tra" path="res://img/icon_sound_L.png" id="5_00yvu"]
 
 [node name="PipeEnd" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_307sb")
 
 [node name="Base" type="ColorRect" parent="."]

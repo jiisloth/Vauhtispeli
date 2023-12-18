@@ -150,7 +150,18 @@ func _process(delta):
             for flowpart in $Flowingparts.get_children():
                 if flowpart != flow:
                     flowpart.points[1].x = (2*(flowtime/max_flow)-1)*flow.points[1].x
-             
+
+
+func set_failed(t):
+    if t == cabletype:
+        $Highlighting.hide()
+        $Flowingparts.modulate.s = 0.5
+        var tw = create_tween().set_ease(Tween.EASE_IN_OUT)
+        for i in 10:
+            tw.chain().tween_property($Flowingparts, "modulate:v", 0.3, 0.1+ i/100.0) 
+            tw.chain().tween_property($Flowingparts, "modulate:v", 1 - i/20.0, 0.1+ i/100.0) 
+        tw.chain().tween_property($Flowingparts, "modulate:v", 0.3, 0.1+ 10/100.0) 
+            
 
 func end_flow():
     var out = ends.duplicate()
